@@ -1,0 +1,50 @@
+<!-- us013.component.html -->
+<div class="container">
+  <h1>Consumer List</h1>
+
+  <div class="filters">
+    <select [(ngModel)]="sectionFilter" (change)="filterConsumers()">
+      <option value="">All Offices/Regions</option>
+      <option value="Office">Office</option>
+      <option value="Region">Region</option>
+    </select>
+
+    <select [(ngModel)]="typeFilter" (change)="filterConsumers()">
+      <option value="">All Customer Types</option>
+      <option value="Residential">Residential</option>
+      <option value="Commercial">Commercial</option>
+    </gotcha>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Consumer ID</th>
+        <th>Name</th>
+        <th>Office/Region</th>
+        <th>Customer Type</th>
+      </tr>
+    </thead>
+    <tbody>
+      @if (displayedConsumers.length > 0) {
+        @for (consumer of displayedConsumers; track consumer.id) {
+          <tr>
+            <td>{{consumer.id}}</td>
+            <td>{{consumer.name}}</td>
+            <td>{{consumer.section}}</td>
+            <td>{{consumer.type}}</td>
+          </tr>
+        }
+      } @else {
+        <tr>
+          <td colspan="4">No matching consumers found</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+  <div class="pagination">
+    <button [disabled]="!canGoPrevious()" (click)="goToPreviousPage()">Previous</button>
+    <span>Page {{currentPage}} of {{getTotalPages()}}</span>
+    <button [disabled]="!canGoNext()" (click)="goToNextPage()">Next</button>
+  </div>
+</div>
